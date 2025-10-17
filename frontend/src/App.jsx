@@ -57,7 +57,7 @@ export default function IpChecker() {
           </h1>
 
           <p className="text-sm text-gray-600 mb-6">
-            ♡ ♡ ♡
+
           </p>
 
           <div className="flex gap-2 mb-4">
@@ -104,7 +104,7 @@ export default function IpChecker() {
                 animate={{ opacity: 1 }}
                 className="text-green-600 font-medium mb-4"
               >
-              
+              ♡ ♡ ♡
               </motion.p>
             )}
           </AnimatePresence>
