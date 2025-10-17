@@ -110,7 +110,7 @@ export default function App() {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 10 }}
-              className="bg-white/80 rounded-xl shadow-inner p-4 mt-3 max-h-64 overflow-y-auto"
+              className="bg-white/80 rounded-2xl shadow-inner p-5 mt-4 max-h-[70vh] overflow-y-auto scrollbar-thin scrollbar-thumb-pink-300 scrollbar-track-pink-100"
             >
               <h2 className="font-semibold text-pink-600 mb-2">
                 รายชื่อผู้เล่น ({players.length})
