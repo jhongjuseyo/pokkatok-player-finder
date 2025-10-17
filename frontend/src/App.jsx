@@ -38,7 +38,6 @@ export default function IpChecker() {
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-sky-100 via-blue-50 to-cyan-100 text-gray-800 px-4">
-
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
@@ -52,13 +51,8 @@ export default function IpChecker() {
           transition={{ delay: 0.2 }}
         >
           <h1 className="text-3xl font-bold text-pink-400 mb-4">
-            pok ka tok
-            #รู้พิกัด (✿ᴗ͈ˬᴗ͈)⁾⁾
+            pok ka tok #รู้พิกัด (✿ᴗ͈ˬᴗ͈)⁾⁾
           </h1>
-
-          <p className="text-sm text-gray-600 mb-6">
-
-          </p>
 
           <div className="flex gap-2 mb-4">
             <input
@@ -66,7 +60,6 @@ export default function IpChecker() {
               value={ip}
               onChange={(e) => setIp(e.target.value)}
               className="flex-1 border border-sky-200 rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-sky-300"
-
             />
             <motion.button
               whileTap={{ scale: 0.95 }}
@@ -78,7 +71,6 @@ export default function IpChecker() {
                   ? "bg-pink-200 cursor-wait"
                   : "bg-pink-300 hover:bg-pink-400 text-white shadow-md"
               }`}
-
             >
               {loading ? "Connecting..." : "Connect"}
             </motion.button>
@@ -106,15 +98,13 @@ export default function IpChecker() {
                 animate={{ opacity: 1 }}
                 className="text-zinc-900 font-medium mb-4"
               >
-              ♡ ♡ ♡
+                ♡ ♡ ♡
               </motion.p>
             )}
           </AnimatePresence>
 
           {!players.length && connected && !loading && (
-            <p className="text-gray-500 text-sm">
-              No players currently online
-            </p>
+            <p className="text-gray-500 text-sm">No players currently online</p>
           )}
         </motion.div>
 
@@ -136,19 +126,16 @@ export default function IpChecker() {
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             className="w-full border border-sky-300 rounded-xl px-3 py-2 mb-3 text-sm focus:outline-none focus:ring-2 focus:ring-sky-400"
-
           />
 
           {/* ✅ Player List */}
           <ul className="space-y-1 text-left text-sm min-h-[250px]">
             <AnimatePresence>
               {players
-                .filter((p) =>
-                  {p.name || "Unknown Player"}
-
-                    .toLowerCase()
-                    .includes(search.toLowerCase())
-                )
+                .filter((p) => {
+                  const name = p.name || "Unknown Player";
+                  return name.toLowerCase().includes(search.toLowerCase());
+                })
                 .map((p, i) => (
                   <motion.li
                     key={p.id || p.name || i}
@@ -157,22 +144,24 @@ export default function IpChecker() {
                     animate={{ opacity: 1, backgroundColor: "#fff0f6" }}
                     exit={{ opacity: 0 }}
                     transition={{ duration: 0.5 }}
-                    className="border border-sky-200 px-3 py-1 rounded-lg shadow-sm"
-
+                    className="border border-sky-200 px-3 py-1 rounded-lg shadow-sm flex justify-between"
                   >
-                    {`${p.name || "Unknown Player"} (ID: ${p.id || "?"})`}
-                    
+                    <span className="font-medium text-gray-700">
+                      {p.name || "Unknown Player"}
+                    </span>
+                    <span className="text-gray-400 text-xs">
+                      ID: {p.id || "?"}
+                    </span>
                   </motion.li>
                 ))}
             </AnimatePresence>
           </ul>
 
           {/* ✅ Message when no players found */}
-          {players.filter((p) =>
-            (p.name || "Unknown Player")
-              .toLowerCase()
-              .includes(search.toLowerCase())
-          ).length === 0 && (
+          {players.filter((p) => {
+            const name = p.name || "Unknown Player";
+            return name.toLowerCase().includes(search.toLowerCase());
+          }).length === 0 && (
             <p className="text-gray-400 text-sm text-center mt-2">
               No players found
             </p>
