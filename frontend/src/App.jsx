@@ -47,7 +47,7 @@ export default function App() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
         >
-          💜 POKKATOK Player Finder
+          pok-ka-tok ♡ ♡ 
         </motion.h1>
 
         <p className="text-sm text-gray-600 mb-6">
