@@ -56,7 +56,7 @@ export default function IpChecker() {
           </h1>
 
           <p className="text-sm text-gray-600 mb-6">
-            Connecting to IP: <span className="font-semibold">{ip}</span>
+      
           </p>
 
           <div className="flex gap-2 mb-4">
