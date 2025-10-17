@@ -160,7 +160,8 @@ export default function IpChecker() {
                     className="border border-sky-200 px-3 py-1 rounded-lg shadow-sm"
 
                   >
-                    {p.name || "Unknown Player"}
+                    {`${p.name || "Unknown Player"} (ID: ${p.id || "?"})`}
+                    
                   </motion.li>
                 ))}
             </AnimatePresence>
