@@ -110,50 +110,57 @@ export default function IpChecker() {
         </div>
 
         {/* 🔹 ฝั่งขวา: Player List */}
-        <div className="bg-white/80 rounded-2xl shadow-inner p-5 max-h-[70vh] overflow-y-auto scrollbar-thin scrollbar-thumb-pink-300 scrollbar-track-pink-100">
-          <h2 className="font-semibold text-pink-600 mb-2 text-center">
-            รายชื่อผู้เล่น ({players.length})
-          </h2>
+<div className="bg-white/80 rounded-2xl shadow-inner p-5 max-h-[70vh] overflow-y-auto scrollbar-thin scrollbar-thumb-pink-300 scrollbar-track-pink-100 transition-all duration-300">
+  <h2 className="font-semibold text-pink-600 mb-2 text-center">
+    รายชื่อผู้เล่น ({players.length})
+  </h2>
 
-          <input
-            type="text"
-            placeholder="🔍 ค้นหาชื่อผู้เล่น..."
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            className="w-full border border-pink-200 rounded-xl px-3 py-2 mb-3 text-sm focus:outline-none focus:ring-2 focus:ring-pink-300"
-          />
+  {/* ✅ ช่องค้นหา */}
+  <input
+    type="text"
+    placeholder="🔍 ค้นหาชื่อผู้เล่น..."
+    value={search}
+    onChange={(e) => setSearch(e.target.value)}
+    className="w-full border border-pink-200 rounded-xl px-3 py-2 mb-3 text-sm focus:outline-none focus:ring-2 focus:ring-pink-300"
+  />
 
-          <ul className="space-y-1 text-left text-sm">
-            {players
-              .filter((p) =>
-                (p.name || "Unknown Player")
-                  .toLowerCase()
-                  .includes(search.toLowerCase())
-              )
-              .map((p, i) => (
-                <motion.li
-                  key={i}
-                  initial={{ opacity: 0, x: -10 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: i * 0.03 }}
-                  className="bg-pink-50 border border-pink-100 px-3 py-1 rounded-lg"
-                >
-                  {p.name || "Unknown Player"}
-                </motion.li>
-              ))}
-          </ul>
+  {/* ✅ รายชื่อคงขนาดกล่อง */}
+  <ul className="space-y-1 text-left text-sm min-h-[250px]">
+    <AnimatePresence>
+      {players
+        .filter((p) =>
+          (p.name || "Unknown Player")
+            .toLowerCase()
+            .includes(search.toLowerCase())
+        )
+        .map((p, i) => (
+          <motion.li
+            key={p.id || p.name || i}
+            layout
+            initial={{ opacity: 0, backgroundColor: "#fce7f3" }}
+            animate={{ opacity: 1, backgroundColor: "#fff0f6" }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.4 }}
+            className="border border-pink-100 px-3 py-1 rounded-lg shadow-sm"
+          >
+            {p.name || "Unknown Player"}
+          </motion.li>
+        ))}
+    </AnimatePresence>
+  </ul>
 
-          {players.filter((p) =>
-            (p.name || "Unknown Player")
-              .toLowerCase()
-              .includes(search.toLowerCase())
-          ).length === 0 && (
-            <p className="text-gray-400 text-sm text-center mt-2">
-              ไม่พบผู้เล่นที่ค้นหา
-            </p>
-          )}
-        </div>
-      </motion.div>
+  {/* ✅ ข้อความเมื่อไม่พบผู้เล่น */}
+  {players.filter((p) =>
+    (p.name || "Unknown Player")
+      .toLowerCase()
+      .includes(search.toLowerCase())
+  ).length === 0 && (
+    <p className="text-gray-400 text-sm text-center mt-2">
+      ไม่พบผู้เล่นที่ค้นหา
+    </p>
+  )}
+</div>
+
 
       <footer className="mt-6 text-xs text-gray-500">
         Made with 💜 by POKKATOK
