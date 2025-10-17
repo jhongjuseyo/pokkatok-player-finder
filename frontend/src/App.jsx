@@ -28,7 +28,7 @@ export default function IpChecker() {
       setPlayers(data);
       setConnected(true);
     } catch (err) {
-      setError("❌ ไม่สามารถเชื่อมต่อกับเซิร์ฟเวอร์ได้");
+      setError("Unable to connect to the server :-(");
     } finally {
       setLoading(false);
     }
@@ -42,7 +42,7 @@ export default function IpChecker() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
       >
-        💜 LNW Player Finder
+        pok ka tok (✿ᴗ͈ˬᴗ͈)⁾⁾
       </motion.h1>
 
       {/* ✅ Layout 2 ฝั่ง */}
@@ -163,7 +163,7 @@ export default function IpChecker() {
 
 
       <footer className="mt-6 text-xs text-gray-500">
-        Made with 💜 by POKKATOK
+        ห้ามส่งต่อนะครัฟ อิ____อิ
       </footer>
     </div>
   );
