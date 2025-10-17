@@ -30,7 +30,7 @@ export default function IpChecker() {
       setPlayers(data);
       setConnected(true);
     } catch (err) {
-      setError("❌ Unable to connect to the server");
+      setError("Unable to connect to the server");
     } finally {
       setLoading(false);
     }
@@ -51,7 +51,8 @@ export default function IpChecker() {
           transition={{ delay: 0.2 }}
         >
           <h1 className="text-3xl font-bold text-pink-600 mb-4">
-            ป้อกกะต้อก #รู้พิกัด (✿ᴗ͈ˬᴗ͈)⁾⁾
+            pok ka tok
+            #รู้พิกัด (✿ᴗ͈ˬᴗ͈)⁾⁾
           </h1>
 
           <p className="text-sm text-gray-600 mb-6">
@@ -102,7 +103,7 @@ export default function IpChecker() {
                 animate={{ opacity: 1 }}
                 className="text-green-600 font-medium mb-4"
               >
-                ♡ ♡ ♡
+              
               </motion.p>
             )}
           </AnimatePresence>
@@ -128,7 +129,7 @@ export default function IpChecker() {
           {/* ✅ Search Box */}
           <input
             type="text"
-            placeholder="🔍 Search player name..."
+            placeholder="Search player name..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             className="w-full border border-pink-200 rounded-xl px-3 py-2 mb-3 text-sm focus:outline-none focus:ring-2 focus:ring-pink-300"
