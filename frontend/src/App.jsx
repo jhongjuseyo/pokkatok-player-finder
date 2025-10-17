@@ -51,13 +51,13 @@ export default function IpChecker() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
         >
-          <h1 className="text-3xl font-bold text-purple-300 mb-4">
+          <h1 className="text-3xl font-bold text-pink-400 mb-4">
             pok ka tok
             #รู้พิกัด (✿ᴗ͈ˬᴗ͈)⁾⁾
           </h1>
 
           <p className="text-sm text-gray-600 mb-6">
-      
+      ♡ ♡ ♡
           </p>
 
           <div className="flex gap-2 mb-4">
