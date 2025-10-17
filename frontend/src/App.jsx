@@ -144,7 +144,8 @@ export default function IpChecker() {
             <AnimatePresence>
               {players
                 .filter((p) =>
-                  (p.name || "Unknown Player")
+                  {`${p.name || "Unknown Player"} (ID: ${p.id || "?"})`}
+
                     .toLowerCase()
                     .includes(search.toLowerCase())
                 )
