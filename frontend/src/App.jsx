@@ -65,7 +65,8 @@ export default function IpChecker() {
               type="text"
               value={ip}
               onChange={(e) => setIp(e.target.value)}
-              className="flex-1 border border-pink-300 rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-pink-300"
+              className="flex-1 border border-sky-200 rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-sky-300"
+
             />
             <motion.button
               whileTap={{ scale: 0.95 }}
@@ -74,9 +75,10 @@ export default function IpChecker() {
               disabled={loading}
               className={`px-4 py-2 rounded-xl font-medium transition-all ${
                 loading
-                  ? "bg-pink-300 cursor-wait"
-                  : "bg-gradient-to-r from-pink-400 to-purple-400 hover:opacity-90 text-white shadow-md"
+                  ? "bg-sky-300 cursor-wait"
+                  : "bg-gradient-to-r from-sky-400 to-sky-600 hover:opacity-90 text-white shadow-md"
               }`}
+
             >
               {loading ? "Connecting..." : "Connect"}
             </motion.button>
@@ -133,7 +135,8 @@ export default function IpChecker() {
             placeholder="Search player name..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full border border-pink-200 rounded-xl px-3 py-2 mb-3 text-sm focus:outline-none focus:ring-2 focus:ring-pink-300"
+            className="w-full border border-sky-300 rounded-xl px-3 py-2 mb-3 text-sm focus:outline-none focus:ring-2 focus:ring-sky-400"
+
           />
 
           {/* ✅ Player List */}
@@ -153,7 +156,8 @@ export default function IpChecker() {
                     animate={{ opacity: 1, backgroundColor: "#fff0f6" }}
                     exit={{ opacity: 0 }}
                     transition={{ duration: 0.5 }}
-                    className="border border-pink-100 px-3 py-1 rounded-lg shadow-sm"
+                    className="border border-sky-200 px-3 py-1 rounded-lg shadow-sm"
+
                   >
                     {p.name || "Unknown Player"}
                   </motion.li>
