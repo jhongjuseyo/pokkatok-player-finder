@@ -122,50 +122,71 @@ export default function IpChecker() {
           {/* ✅ Search Box */}
           <input
             type="text"
-            placeholder="Search player name..."
+            placeholder="Search by name or ID..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             className="w-full border border-sky-300 rounded-xl px-3 py-2 mb-3 text-sm focus:outline-none focus:ring-2 focus:ring-sky-400"
           />
 
-          {/* ✅ Player List */}
-          <ul className="space-y-1 text-left text-sm min-h-[250px]">
-            <AnimatePresence>
-              {players
-                .filter((p) => {
-                  const name = p.name || "Unknown Player";
-                  return name.toLowerCase().includes(search.toLowerCase());
-                })
-                .map((p, i) => (
-                  <motion.li
-                    key={p.id || p.name || i}
-                    layout
-                    initial={{ opacity: 0, backgroundColor: "#fbcfe8" }}
-                    animate={{ opacity: 1, backgroundColor: "#fff0f6" }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 0.5 }}
-                    className="border border-sky-200 px-3 py-1 rounded-lg shadow-sm flex justify-between"
-                  >
-                    <span className="font-medium text-gray-700">
-                      {p.name || "Unknown Player"}
-                    </span>
-                    <span className="text-gray-400 text-xs">
-                      ID: {p.id || "?"}
-                    </span>
-                  </motion.li>
-                ))}
-            </AnimatePresence>
-          </ul>
+          {/* ✅ Filtered Player Logic */}
+          {(() => {
+            const filteredPlayers = players.filter((p) => {
+              const name = (p.name || "Unknown Player").toLowerCase();
+              const id = String(p.id || "").toLowerCase();
+              const term = search.toLowerCase();
+              return name.includes(term) || id.includes(term);
+            });
 
-          {/* ✅ Message when no players found */}
-          {players.filter((p) => {
-            const name = p.name || "Unknown Player";
-            return name.toLowerCase().includes(search.toLowerCase());
-          }).length === 0 && (
-            <p className="text-gray-400 text-sm text-center mt-2">
-              No players found
-            </p>
-          )}
+            return (
+              <>
+                {/* 🔹 Found count with animation */}
+                <AnimatePresence mode="wait">
+                  <motion.p
+                    key={filteredPlayers.length} // จะ re-render เมื่อจำนวนผลลัพธ์เปลี่ยน
+                    initial={{ opacity: 0, y: -5 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -5 }}
+                    transition={{ duration: 0.3 }}
+                    className="text-xs text-gray-500 mb-2 text-right"
+                  >
+                    Found {filteredPlayers.length} player
+                    {filteredPlayers.length !== 1 ? "s" : ""}
+                  </motion.p>
+                </AnimatePresence>
+
+                {/* 🔹 Player list */}
+                <ul className="space-y-1 text-left text-sm min-h-[250px]">
+                  <AnimatePresence>
+                    {filteredPlayers.map((p, i) => (
+                      <motion.li
+                        key={p.id || p.name || i}
+                        layout
+                        initial={{ opacity: 0, backgroundColor: "#fbcfe8" }}
+                        animate={{ opacity: 1, backgroundColor: "#fff0f6" }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.5 }}
+                        className="border border-sky-200 px-3 py-1 rounded-lg shadow-sm flex justify-between"
+                      >
+                        <span className="font-medium text-gray-700">
+                          {p.name || "Unknown Player"}
+                        </span>
+                        <span className="text-gray-400 text-xs">
+                          ID: {p.id || "?"}
+                        </span>
+                      </motion.li>
+                    ))}
+                  </AnimatePresence>
+                </ul>
+
+                {/* 🔹 No players found */}
+                {filteredPlayers.length === 0 && (
+                  <p className="text-gray-400 text-sm text-center mt-2">
+                    No players found
+                  </p>
+                )}
+              </>
+            );
+          })()}
         </motion.div>
       </motion.div>
 
