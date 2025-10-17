@@ -47,7 +47,7 @@ export default function App() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
         >
-          pok-ka-tok ♡ ♡ 
+          pok ka tok (✿ ᴗ͈ˬᴗ͈)⁾⁾
         </motion.h1>
 
         <p className="text-sm text-gray-600 mb-6">
@@ -98,7 +98,7 @@ export default function App() {
               animate={{ opacity: 1 }}
               className="text-green-600 font-medium mb-4"
             >
-              ✅ เชื่อมต่อสำเร็จ: {ip}
+              Connection Successful!
             </motion.p>
           )}
         </AnimatePresence>
@@ -113,7 +113,7 @@ export default function App() {
               className="bg-white/80 rounded-2xl shadow-inner p-5 mt-4 max-h-[70vh] overflow-y-auto scrollbar-thin scrollbar-thumb-pink-300 scrollbar-track-pink-100"
             >
               <h2 className="font-semibold text-pink-600 mb-2">
-                รายชื่อผู้เล่น ({players.length})
+                Player List ({players.length})
               </h2>
               <ul className="space-y-1 text-left text-sm">
                 {players.map((p, i) => (
@@ -138,7 +138,7 @@ export default function App() {
       </motion.div>
 
       <footer className="mt-6 text-xs text-gray-500">
-        Made with 💜 by POKKATOK
+        ห้ามส่งต่อนะครัฟ อิ____อิ
       </footer>
     </div>
   );
