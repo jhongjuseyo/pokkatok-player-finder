@@ -75,8 +75,8 @@ export default function IpChecker() {
               disabled={loading}
               className={`px-4 py-2 rounded-xl font-medium transition-all ${
                 loading
-                  ? "bg-sky-300 cursor-wait"
-                  : "bg-gradient-to-r from-sky-400 to-sky-600 hover:opacity-90 text-white shadow-md"
+                  ? "bg-pink-200 cursor-wait"
+                  : "bg-pink-300 hover:bg-pink-400 text-white shadow-md"
               }`}
 
             >
