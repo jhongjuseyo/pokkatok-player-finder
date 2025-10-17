@@ -103,74 +103,20 @@ export default function App() {
           )}
         </AnimatePresence>
 
-        <AnimatePresence>
-          {players.length > 0 && (
-            <motion.div
-              key="players"
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 10 }}
-              className="bg-white/80 rounded-2xl shadow-inner p-5 mt-4 max-h-[70vh] overflow-y-auto scrollbar-thin scrollbar-thumb-pink-300 scrollbar-track-pink-100"
-            >
-              <h2 className="font-semibold text-pink-600 mb-2">
-                Player List ({players.length})
-              </h2>
-              <AnimatePresence>
-  {players.length > 0 && (
-    <motion.div
-      key="players"
-      initial={{ opacity: 0, y: 10 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: 10 }}
-      className="bg-white/80 rounded-xl shadow-inner p-4 mt-3 max-h-64 overflow-y-auto"
+        <ul className="space-y-1 text-left text-sm">
+  {players.map((p, i) => (
+    <motion.li
+      key={i}
+      initial={{ opacity: 0, x: -10 }}
+      animate={{ opacity: 1, x: 0 }}
+      transition={{ delay: i * 0.05 }}
+      className="bg-pink-50 border border-pink-100 px-3 py-1 rounded-lg"
     >
-      <h2 className="font-semibold text-pink-600 mb-2">
-        รายชื่อผู้เล่น ({players.length})
-      </h2>
+      {p.name || "Unknown Player"}
+    </motion.li>
+  ))}
+</ul>
 
-      {/* ✅ ช่องค้นหา */}
-      <input
-        type="text"
-        placeholder="🔍 ค้นหาชื่อผู้เล่น..."
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-        className="w-full border border-pink-200 rounded-xl px-3 py-2 mb-3 text-sm focus:outline-none focus:ring-2 focus:ring-pink-300"
-      />
-
-      {/* ✅ กรองรายชื่อผู้เล่น */}
-      <ul className="space-y-1 text-left text-sm">
-        {players
-          .filter((p) =>
-            (p.name || "Unknown Player")
-              .toLowerCase()
-              .includes(search.toLowerCase())
-          )
-          .map((p, i) => (
-            <motion.li
-              key={i}
-              initial={{ opacity: 0, x: -10 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: i * 0.05 }}
-              className="bg-pink-50 border border-pink-100 px-3 py-1 rounded-lg"
-            >
-              {p.name || "Unknown Player"}
-            </motion.li>
-          ))}
-      </ul>
-
-      {/* ✅ ถ้าไม่มีผลลัพธ์ */}
-      {players.filter((p) =>
-        (p.name || "Unknown Player")
-          .toLowerCase()
-          .includes(search.toLowerCase())
-      ).length === 0 && (
-        <p className="text-gray-400 text-sm text-center mt-2">
-          ไม่พบผู้เล่นที่ค้นหา
-        </p>
-      )}
-    </motion.div>
-  )}
-</AnimatePresence>
             </motion.div>
           )}
         </AnimatePresence>
