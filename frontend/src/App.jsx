@@ -51,7 +51,7 @@ export default function IpChecker() {
           transition={{ delay: 0.2 }}
         >
           <h1 className="text-3xl font-bold text-pink-600 mb-4">
-            💜 LNW Player Finder
+            ป้อกกะต้อก #รู้พิกัด (✿ᴗ͈ˬᴗ͈)⁾⁾
           </h1>
 
           <p className="text-sm text-gray-600 mb-6">
@@ -102,7 +102,7 @@ export default function IpChecker() {
                 animate={{ opacity: 1 }}
                 className="text-green-600 font-medium mb-4"
               >
-                ✅ Connected to {ip}
+                ♡ ♡ ♡
               </motion.p>
             )}
           </AnimatePresence>
@@ -173,7 +173,7 @@ export default function IpChecker() {
       </motion.div>
 
       <footer className="mt-6 text-xs text-gray-500">
-        Made with 💜 by POKKATOK
+        ห้ามส่งต่อนะครัฟ อิ____อิ
       </footer>
     </div>
   );
