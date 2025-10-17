@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function IpChecker() {
+  // ✅ Default IP
   const [ip, setIp] = useState("146.19.69.69:30120");
   const [players, setPlayers] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -9,6 +10,7 @@ export default function IpChecker() {
   const [connected, setConnected] = useState(false);
   const [search, setSearch] = useState("");
 
+  // Auto-connect when page loads
   useEffect(() => {
     handleConnect();
   }, []);
@@ -28,35 +30,32 @@ export default function IpChecker() {
       setPlayers(data);
       setConnected(true);
     } catch (err) {
-      setError("Unable to connect to the server :-(");
+      setError("❌ Unable to connect to the server");
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-pink-100 via-purple-100 to-pink-200 text-gray-800 px-4 py-8">
-      <motion.h1
-        className="text-3xl font-bold text-pink-600 mb-6 text-center"
-        initial={{ opacity: 0, y: -10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-      >
-        pok ka tok (✿ᴗ͈ˬᴗ͈)⁾⁾
-      </motion.h1>
-
-      {/* ✅ Layout 2 ฝั่ง */}
+    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-pink-100 via-purple-100 to-pink-200 text-gray-800 px-4">
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
-        className="w-full max-w-5xl bg-white/70 backdrop-blur-lg rounded-3xl shadow-xl p-6 grid md:grid-cols-2 gap-6"
+        className="w-full max-w-4xl bg-white/70 backdrop-blur-lg rounded-3xl shadow-xl p-6 text-center grid md:grid-cols-2 gap-6"
       >
-        {/* 🔹 ฝั่งซ้าย: Connect Box */}
-        <div className="flex flex-col justify-center text-center border-r border-pink-200 pr-6">
-          <p className="text-sm text-gray-600 mb-4">
-            กำลังเชื่อมต่อกับ IP:{" "}
-            <span className="font-semibold">{ip}</span>
+        {/* 🔹 Left Section: Connection */}
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2 }}
+        >
+          <h1 className="text-3xl font-bold text-pink-600 mb-4">
+            💜 LNW Player Finder
+          </h1>
+
+          <p className="text-sm text-gray-600 mb-6">
+            Connecting to IP: <span className="font-semibold">{ip}</span>
           </p>
 
           <div className="flex gap-2 mb-4">
@@ -77,7 +76,7 @@ export default function IpChecker() {
                   : "bg-gradient-to-r from-pink-400 to-purple-400 hover:opacity-90 text-white shadow-md"
               }`}
             >
-              {loading ? "กำลังเชื่อมต่อ..." : "Connect"}
+              {loading ? "Connecting..." : "Connect"}
             </motion.button>
           </div>
 
@@ -101,69 +100,80 @@ export default function IpChecker() {
                 key="connected"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                className="text-green-600 font-medium"
+                className="text-green-600 font-medium mb-4"
               >
-                ✅ เชื่อมต่อสำเร็จ
+                ✅ Connected to {ip}
               </motion.p>
             )}
           </AnimatePresence>
-        </div>
 
-        {/* 🔹 ฝั่งขวา: Player List */}
-<div className="bg-white/80 rounded-2xl shadow-inner p-5 max-h-[70vh] overflow-y-auto scrollbar-thin scrollbar-thumb-pink-300 scrollbar-track-pink-100 transition-all duration-300">
-  <h2 className="font-semibold text-pink-600 mb-2 text-center">
-    รายชื่อผู้เล่น ({players.length})
-  </h2>
+          {!players.length && connected && !loading && (
+            <p className="text-gray-500 text-sm">
+              No players currently online
+            </p>
+          )}
+        </motion.div>
 
-  {/* ✅ ช่องค้นหา */}
-  <input
-    type="text"
-    placeholder="🔍 ค้นหาชื่อผู้เล่น..."
-    value={search}
-    onChange={(e) => setSearch(e.target.value)}
-    className="w-full border border-pink-200 rounded-xl px-3 py-2 mb-3 text-sm focus:outline-none focus:ring-2 focus:ring-pink-300"
-  />
+        {/* 🔹 Right Section: Player List */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3 }}
+          className="bg-white/80 rounded-2xl shadow-inner p-5 max-h-[70vh] overflow-y-auto scrollbar-thin scrollbar-thumb-pink-300 scrollbar-track-pink-100 transition-all duration-300"
+        >
+          <h2 className="font-semibold text-pink-600 mb-2 text-center">
+            Player List ({players.length})
+          </h2>
 
-  {/* ✅ รายชื่อคงขนาดกล่อง */}
-  <ul className="space-y-1 text-left text-sm min-h-[250px]">
-    <AnimatePresence>
-      {players
-        .filter((p) =>
-          (p.name || "Unknown Player")
-            .toLowerCase()
-            .includes(search.toLowerCase())
-        )
-        .map((p, i) => (
-          <motion.li
-            key={p.id || p.name || i}
-            layout
-            initial={{ opacity: 0, backgroundColor: "#fce7f3" }}
-            animate={{ opacity: 1, backgroundColor: "#fff0f6" }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.4 }}
-            className="border border-pink-100 px-3 py-1 rounded-lg shadow-sm"
-          >
-            {p.name || "Unknown Player"}
-          </motion.li>
-        ))}
-    </AnimatePresence>
-  </ul>
+          {/* ✅ Search Box */}
+          <input
+            type="text"
+            placeholder="🔍 Search player name..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            className="w-full border border-pink-200 rounded-xl px-3 py-2 mb-3 text-sm focus:outline-none focus:ring-2 focus:ring-pink-300"
+          />
 
-  {/* ✅ ข้อความเมื่อไม่พบผู้เล่น */}
-  {players.filter((p) =>
-    (p.name || "Unknown Player")
-      .toLowerCase()
-      .includes(search.toLowerCase())
-  ).length === 0 && (
-    <p className="text-gray-400 text-sm text-center mt-2">
-      ไม่พบผู้เล่นที่ค้นหา
-    </p>
-  )}
-</div>
+          {/* ✅ Player List */}
+          <ul className="space-y-1 text-left text-sm min-h-[250px]">
+            <AnimatePresence>
+              {players
+                .filter((p) =>
+                  (p.name || "Unknown Player")
+                    .toLowerCase()
+                    .includes(search.toLowerCase())
+                )
+                .map((p, i) => (
+                  <motion.li
+                    key={p.id || p.name || i}
+                    layout
+                    initial={{ opacity: 0, backgroundColor: "#fbcfe8" }}
+                    animate={{ opacity: 1, backgroundColor: "#fff0f6" }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.5 }}
+                    className="border border-pink-100 px-3 py-1 rounded-lg shadow-sm"
+                  >
+                    {p.name || "Unknown Player"}
+                  </motion.li>
+                ))}
+            </AnimatePresence>
+          </ul>
 
+          {/* ✅ Message when no players found */}
+          {players.filter((p) =>
+            (p.name || "Unknown Player")
+              .toLowerCase()
+              .includes(search.toLowerCase())
+          ).length === 0 && (
+            <p className="text-gray-400 text-sm text-center mt-2">
+              No players found
+            </p>
+          )}
+        </motion.div>
+      </motion.div>
 
       <footer className="mt-6 text-xs text-gray-500">
-        ห้ามส่งต่อนะครัฟ อิ____อิ
+        Made with 💜 by POKKATOK
       </footer>
     </div>
   );
