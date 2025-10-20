@@ -96,7 +96,7 @@ export default function IpChecker() {
                 key="connected"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                className="text-zinc-900 font-medium mb-4"
+                className="text-pink-400 font-medium mb-4"
               >
                 ♡ ♡ ♡
               </motion.p>
